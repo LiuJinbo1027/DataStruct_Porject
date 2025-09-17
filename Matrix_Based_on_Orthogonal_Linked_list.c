@@ -53,7 +53,7 @@ int InsertCrossList(CrossList *M, int row, int col, int value) {
     M->rhead[row] = p;
   } else {
     OLNode *q = M->rhead[row];
-    while (q->right && p->right->col < col) {
+    while (q->right && q->right->col < col) {
       q = q->right;
     }
     p->right = q->right;
@@ -85,14 +85,14 @@ void DestroyCrossList(CrossList *M) {
       free(p);
     }
   }
-  freee(M->rhead);
+  free(M->rhead);
   free(M->chead);
   M->rhead = NULL;
   M->chead = NULL;
   M->rows = M->cols = M->nums = 0;
 }
 
-void PrintrossList(CrossList *M) {
+void PrintCrossList(CrossList *M) {
   printf("Matrix(%d, %d), number of non-zero: %d\n", M->rows, M->cols, M->nums);
   for (int i = 1; i <= M->rows; i++) {
     OLNode *p = M->rhead[i];
@@ -108,7 +108,7 @@ void PrintrossList(CrossList *M) {
   }
 }
 
-int MultiCrossList(CrossList *A, CrossList *B, CrossList *C) {
+int MultiplyCrossList(CrossList *A, CrossList *B, CrossList *C) {
   if (A->cols != B->rows) {
     printf("Different Dimension! Error!\n");
     return 0;
