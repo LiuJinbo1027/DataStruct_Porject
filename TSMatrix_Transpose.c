@@ -64,27 +64,31 @@ void FastTransposeTSMatrix(TSMatrix M, TSMatrix *T) {
   if (T->nums == 0)
     return;
 
+  // 统计原矩阵中每一列非零元素个数
   int num[MAXSIZE] = {0};
   for (int i = 1; i <= M.nums; i++) {
-    num[M.data[i].col]++;
+    num[M.data[i].col]++; // 找到某一列非零元素，该列++
   }
 
+  // 计算每一列第一个非零元素在转置矩阵中的位置
   int cpot[MAXSIZE] = {0};
-  cpot[1] = 1;
+  cpot[1] = 1; // 第一列的非零元素在位置1
   for (int col = 2; col <= M.cols; col++) {
     cpot[col] = cpot[col - 1] + num[col - 1];
+    // 第col列的第一个非0元素位置 =
+    // 第col-1列的第一个非零元素位置 + 第col-1列的非零元素个数
   }
 
   // 进行转置
   for (int p = 1; p <= M.nums; p++) {
-    int col = M.data[p].col;
-    int q = cpot[col];
+    int col = M.data[p].col; // 获取当前元素列号
+    int q = cpot[col];       // 获取该列在转置矩阵中的当前位置
 
     T->data[q].row = M.data[p].col;
     T->data[q].col = M.data[p].row;
     T->data[q].value = M.data[p].value;
 
-    cpot[col]++; // 更新当前位置
+    cpot[col]++; // 更新当前位置，为同列的下一个元素作准备
   }
 }
 
