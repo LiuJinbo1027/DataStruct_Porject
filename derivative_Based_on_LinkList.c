@@ -49,8 +49,8 @@ Node* derivative(Node* polyHead) {
                 currentNew->next = newNode;
                 currentNew = newNode;
             }
-            current = current->next;
         }
+        current = current->next;
 
         if (newHead == NULL) {
             newHead = createNewNode(0, 0);
@@ -86,7 +86,7 @@ int main() {
     int count = 0;
     int num = 0;
 
-    while (scanf("%d", &num) != "\n") {
+    while (scanf("%d", &num) != EOF) {
         data[count++] = num;
     }
 
