@@ -74,15 +74,15 @@ def delta_R_calculation(number):
 
 
 def E_calculate(delta_R_0, delta_R_0_, R_0, I_m, S, S_):
-    E = 1/2 * math.sqrt( (delta_R_0/(math.sqrt(3)*R_0))**2 + (delta_R_0_/(math.sqrt(3)*R_0))**2 + (I_m/S)**2 + (I_m/S_)**2)
+    E = 1/2 * math.sqrt( (delta_R_0/(math.sqrt(3)*R_0))**2 + (delta_R_0_/(math.sqrt(3)*R_0))**2 + (I_m*(10**(-6))/S)**2 + (I_m*(10**(-6))/S_)**2)
     return E
 
 delta_R_0 = delta_R_calculation(R_0)
 delta_R_0_ = delta_R_calculation(R_0_)
 print(f"delta_R_0 = {delta_R_0:.10f}, delta_R_0' = {delta_R_0_:.10f}")
 
-S = delta_I * R_0 / delta_R
-S_ = delta_I_ * R_0_ / delta_R_
+S = delta_I * R_0 / delta_R / (10**6)
+S_ = delta_I_ * R_0_ / delta_R_ / (10 **6)
 print(f"S = {S:.10f}, S' = {S_:.10f}")
 
 E = E_calculate(delta_R_0, delta_R_0_, R_0, I_m, S, S_)
