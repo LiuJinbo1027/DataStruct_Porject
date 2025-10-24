@@ -22,23 +22,26 @@ ThreadedTreeNode *createNode(char data) {
     return newNode;
 }
 
+// 基于中序遍历的线索二叉树构建
 void inThreading(ThreadedTreeNode *p) {
     if (p != NULL) {
-        inThreading(p->left);
+        inThreading(p->left);  // 递归处理左子树
 
+        // 处理当前节点的前驱线索
         if (p->left == NULL) {
-            p->ltag = 1;
-            p->left = pre;
+            p->ltag = 1;    // 标记为线索
+            p->left = pre;  // 指向前驱节点
         } else {
             p->ltag = 0;
         }
 
+        // 处理其前驱节点的后继线索
         if (pre != NULL && pre->right == NULL) {
             pre->rtag = 1;
-            pre->right = p;
+            pre->right = p;  // 该节点的前驱节点 的后继节点 是该节点
         }
-        pre = p;
-        inThreading(p->right);
+        pre = p;                // 更新前驱节点
+        inThreading(p->right);  // 递归处理右子树
     }
 }
 
