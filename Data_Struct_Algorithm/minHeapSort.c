@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+// 最小堆化：数组，范围，起点
 void minHeapify(int arr[], int n, int i) {
     int smallest = i;       // 初始化最小元素为根节点
     int left = 2 * i + 1;   // 其左节点在数组中的位置
