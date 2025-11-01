@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
@@ -32,7 +30,7 @@ int partitionById(Student arr[], int low, int high) {
 void quickSortById(Student arr[], int low, int high) {
     if (low < high) {
         int pi = partitionById(arr, low, high);
-        quickSortById(arr, low, pi);
+        quickSortById(arr, low, pi - 1);
         quickSortById(arr, pi + 1, high);
     }
 }
@@ -42,10 +40,10 @@ void quickSortByName(Student arr[], int low, int high) {
         Student pivot = arr[high];
         int i = low - 1;
 
-        for (int j = low; j <= high; j++) {
+        for (int j = low; j < high; j++) {
             int nameCmp = strcmp(arr[j].name, pivot.name);
             if (nameCmp < 0 ||
-                (nameCmp = 0 && strcmp(arr[j].id, pivot.id) < 0)) {
+                (nameCmp == 0 && strcmp(arr[j].id, pivot.id) < 0)) {
                 i++;
                 swap(&arr[i], &arr[j]);
             }
@@ -53,7 +51,7 @@ void quickSortByName(Student arr[], int low, int high) {
         swap(&arr[i + 1], &arr[high]);
         int pi = i + 1;
 
-        quickSortByName(arr, low, high);
+        quickSortByName(arr, low, pi - 1);
         quickSortByName(arr, pi + 1, high);
     }
 }
@@ -73,7 +71,7 @@ void quickSortByScore(Student arr[], int low, int high) {
         }
         swap(&arr[i + 1], &arr[high]);
         int pi = i + 1;
-        quickSortByScore(arr, low, pi);
+        quickSortByScore(arr, low, pi - 1);
         quickSortByScore(arr, pi + 1, high);
     }
 }
@@ -81,7 +79,7 @@ void quickSortByScore(Student arr[], int low, int high) {
 int main() {
     int N, C;
     scanf("%d %d", &N, &C);
-    Student *students = (Student *)malloc(sizeof(Student));
+    Student *students = (Student *)malloc(N * sizeof(Student));
 
     for (int i = 0; i < N; i++) {
         scanf("%s %s %d", students[i].id, students[i].name, &students[i].score);
