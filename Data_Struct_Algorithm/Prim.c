@@ -26,7 +26,7 @@ void primMST(int graph[MAX_VERTICES][MAX_VERTICES], int vertices) {
     key[0] = 0;
     parent[0] = -1;
 
-    // 开始遍历，每一次添加一个新节点
+    // 开始遍历，每一次添加一个节点，第一次循环只有根节点的key不为零，添加根节点，更新距离数组
     for (int count = 0; count < vertices - 1; count++) {
         int minKey = INF;
         int minIndex = -1;
