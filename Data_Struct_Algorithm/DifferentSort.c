@@ -63,21 +63,25 @@ void insertSort(int arr[], int n) {
 }
 
 // ========== 希尔排序实现 ==========
+// 对元素有间隔的进行直接排序，不断缩小间隔，直到完成排序
 void shellSort(int arr[], int n) {
-    for (int gap = n / 2; gap > 0; gap /= 2) {
+    for (int gap = n / 2; gap > 0; gap /= 2) {  // 间隔每次缩小一半，下取整
+        // 处理所有满足间隔的数据
         for (int i = gap; i < n; i++) {
-            int temp = arr[i];
+            // 这段代码就是直接插入排序
+            int temp = arr[i];  // 用temp暂存
             int j;
-
-            for (j = i; j >= gap && arr[j - gap] > temp; j -= temp) {
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
                 arr[j] = arr[j - gap];
+                // 按照这一次的间隔规则不断的把更大的元素挪到前面
             }
-            arr[j] = temp;
+            arr[j] = temp;  // 剩下的一个空放置暂存的arr[i]
         }
     }
 }
 
 // ========== 选择排序实现 ==========
+// 从第一位开始，遍历该位往后的数组，找到最小元素，记录下标，做交换
 void selectSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         int minIndex = i;
