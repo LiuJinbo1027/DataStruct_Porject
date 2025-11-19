@@ -49,8 +49,9 @@ void bubbleSort(int arr[], int n) {
 }
 
 // ========== 直接插入排序 ==========
+// 可以理解成扑克牌抓牌排序，不断拓展一个有序区，新元素加入时向后挪动更大的老元素，把新元素放在合适的位置
 void insertSort(int arr[], int n) {
-    for (int i = 1; i < n; i++) {
+    for (int i = 1; i < n; i++) {  // 逐步拓展有序区
         int key = arr[i];
         int j = i - 1;
 
