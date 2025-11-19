@@ -15,6 +15,9 @@ int partition(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
 
+    // i维护的是一个所有元素都小于枢轴的区间
+    // j遍历整个区间，将小于枢轴的元素扔到i维护的区间，同时更新i
+    // 最后把枢轴交换到分界线上
     for (int j = low; j <= high; j++) {
         if (arr[j] <= pivot) {
             i++;
